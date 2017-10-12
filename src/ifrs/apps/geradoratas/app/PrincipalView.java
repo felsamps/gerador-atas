@@ -21,7 +21,7 @@ import javafx.scene.input.MouseEvent;
 
 public class PrincipalView implements Initializable {
     @FXML private ComboBox<String> forumComboBox;
-    @FXML private TextField diaTextField, mesTextField, anoTextField, horaTextField, minutoField, filtroTextField;
+    @FXML private TextField diaTextField, mesTextField, anoTextField, horaTextField, minutoField, filtroTextField, salaTextField;
     @FXML private TextArea pautaTextArea, encaminhamentoTextArea;
     @FXML private ListView<String> pautasListView, encaminhamentosListView;
     @FXML private ListView<Participante> todosListView, participantesListView;
@@ -36,22 +36,26 @@ public class PrincipalView implements Initializable {
         this.initForumChoices();
         this.atualizaParticipantes();
         
-        this.todosListView.setOnMouseReleased(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                adicionaParticipante();
-            }
-        });
+        this.inicializaEventos();
         
-        this.filtroTextField.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                atualizaParticipantes();
-            }
-        });
         
-    }    
-
+    }       
+    @FXML private void acaoBtnAdicionaParticipante(ActionEvent evt) {
+        this.adicionaParticipante();
+    }
+    
+    @FXML private void acaoBtnRemoveParticipante(ActionEvent evt) {
+        this.removeParticipante();
+    }
+    
+    @FXML private void acaoBtnInserePauta(ActionEvent evt) {
+        this.adicionaPauta();
+    }
+    
+    @FXML private void acaoBtnInsereEncaminhamento(ActionEvent evt) {
+        this.adicionaEncaminhamento();
+    }
+    
     private void initForumChoices() {
         ArrayList<String> foruns = this.controller.getForuns();
         ObservableList<String> opcoes = FXCollections.observableArrayList(foruns);
@@ -62,14 +66,6 @@ public class PrincipalView implements Initializable {
         ArrayList<Participante> participantes = this.controller.getParticipantes(this.filtroTextField.getText());
         ObservableList<Participante> opcoes = FXCollections.observableArrayList(participantes);
         this.todosListView.setItems(opcoes);
-    }
-    
-    @FXML private void acaoBtnAdicionaParticipante(ActionEvent evt) {
-        this.adicionaParticipante();
-    }
-    
-    @FXML private void acaoBtnRemoveParticipante(ActionEvent evt) {
-        this.removeParticipante();
     }
     
     private void adicionaParticipante() {
@@ -88,5 +84,34 @@ public class PrincipalView implements Initializable {
             this.participantesListView.getItems().remove(idx); 
         }
     }
+    
+    private void adicionaPauta() {
+        String pauta = this.pautaTextArea.getText();
+        this.pautasListView.getItems().add(pauta);
+        this.pautaTextArea.clear();
+    }
+
+    private void adicionaEncaminhamento() {
+        String pauta = this.encaminhamentoTextArea.getText();
+        this.encaminhamentosListView.getItems().add(pauta);
+        this.encaminhamentoTextArea.clear();
+    }
+    
+    private void inicializaEventos() {
+        this.todosListView.setOnMouseReleased(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                adicionaParticipante();
+            }
+        });
+        
+        this.filtroTextField.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                atualizaParticipantes();
+            }
+        });
+    }
+
     
 }
