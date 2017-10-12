@@ -16,11 +16,12 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
 public class PrincipalView implements Initializable {
     @FXML private ComboBox<String> forumComboBox;
-    @FXML private TextField diaTextField, mesTextField, anoTextField, horaTextField, minutoField;
+    @FXML private TextField diaTextField, mesTextField, anoTextField, horaTextField, minutoField, filtroTextField;
     @FXML private TextArea pautaTextArea, encaminhamentoTextArea;
     @FXML private ListView<String> pautasListView, encaminhamentosListView;
     @FXML private ListView<Participante> todosListView, participantesListView;
@@ -33,7 +34,7 @@ public class PrincipalView implements Initializable {
         this.controller = new PrincipalController(this);
         
         this.initForumChoices();
-        this.initParticipantes();
+        this.atualizaParticipantes();
         
         this.todosListView.setOnMouseReleased(new EventHandler<MouseEvent>() {
             @Override
@@ -42,7 +43,13 @@ public class PrincipalView implements Initializable {
             }
         });
         
-        System.out.println("Passei pelo metodo initialize");
+        this.filtroTextField.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                atualizaParticipantes();
+            }
+        });
+        
     }    
 
     private void initForumChoices() {
@@ -51,8 +58,8 @@ public class PrincipalView implements Initializable {
         this.forumComboBox.setItems(opcoes);
     }
 
-    private void initParticipantes() {
-        ArrayList<Participante> participantes = this.controller.getParticipantes();
+    private void atualizaParticipantes() {
+        ArrayList<Participante> participantes = this.controller.getParticipantes(this.filtroTextField.getText());
         ObservableList<Participante> opcoes = FXCollections.observableArrayList(participantes);
         this.todosListView.setItems(opcoes);
     }

@@ -7,9 +7,17 @@ import java.util.ArrayList;
 public class PrincipalController {
 
     private PrincipalView view;
+    private ArrayList<Participante> todosParticipantes;
     
     public PrincipalController(PrincipalView view) {
         this.view = view;
+        
+        this.todosParticipantes = new ArrayList<>();
+        this.todosParticipantes.add(new Participante("Felipe Martin Sampaio", "Coordenador do Curso"));
+        this.todosParticipantes.add(new Participante("Rafael Vieira Coelho", "Professor"));
+        this.todosParticipantes.add(new Participante("Daniela de Campos", "Professor"));
+        this.todosParticipantes.add(new Participante("Graciele Rosa da Costa Soares", "Setor Pedagógico"));       
+        
     }
 
     public ArrayList<String> getForuns() {
@@ -23,13 +31,14 @@ public class PrincipalController {
         return foruns;
     }
 
-    public ArrayList<Participante> getParticipantes() {
-        ArrayList<Participante> parts = new ArrayList<>();
-        parts.add(new Participante("Felipe Martin Sampaio", "Coordenador do Curso"));
-        parts.add(new Participante("Rafael Vieira Coelho", "Professor"));
-        parts.add(new Participante("Daniela de Campos", "Professor"));
-        parts.add(new Participante("Graciele Rosa da Costa Soares", "Setor Pedagógico"));       
-        return parts;
+    public ArrayList<Participante> getParticipantes(String filtro) {
+        ArrayList<Participante> retorno = new ArrayList<>();
+        for(Participante participante :this.todosParticipantes) {
+            if(participante.toString().contains(filtro)) {
+                retorno.add(participante);
+            }
+        }
+        return retorno;
     }
 
     public void tratarAdicionaParticipante() {

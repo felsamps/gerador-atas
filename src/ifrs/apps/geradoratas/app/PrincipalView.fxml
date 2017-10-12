@@ -22,8 +22,7 @@
     <Label layoutX="124.0" layoutY="74.0" text="Minuto:" />
     <TextField fx:id="horaTextField" layoutX="185.0" layoutY="46.0" prefWidth="47.0" />
     <TextField fx:id="minutoTextField" layoutX="185.0" layoutY="71.0" prefWidth="47.0" />
-    <ListView fx:id="todosListView" layoutX="253.0" layoutY="26.0" prefHeight="210.0" prefWidth="204.0" />
-    <Label layoutX="253.0" layoutY="10.0" text="Todos" />
+    <ListView fx:id="todosListView" layoutX="253.0" layoutY="40.0" prefHeight="211.0" prefWidth="204.0" />
     <ListView fx:id="participantesListView" layoutX="472.0" layoutY="26.0" prefHeight="148.0" prefWidth="204.0" />
     <Label layoutX="472.0" layoutY="10.0" text="Participantes" />
     <Button fx:id="adicionaButton" layoutX="471.0" layoutY="188.0" mnemonicParsing="false" onAction="#acaoBtnAdicionaParticipante" text="Adiciona" />
@@ -46,5 +45,6 @@
         </FXCollections>
       </items>
     </ComboBox>
+    <TextField id="filtroParticipantes" fx:id="filtroTextField" layoutX="253.0" layoutY="12.0" prefWidth="203.9998779296875" />
   </children>
 </AnchorPane>
