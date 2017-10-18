@@ -35,7 +35,7 @@
     <Label layoutX="20.0" layoutY="409.0" text="Encaminhamentos" />
     <Button fx:id="incluirEncaminhamentoButton" layoutX="612.0" layoutY="431.0" mnemonicParsing="false" onAction="#acaoBtnInsereEncaminhamento" text="Incluir" />
     <ListView fx:id="encaminhamentosListView" layoutX="17.0" layoutY="466.0" prefHeight="99.00009999999747" prefWidth="659.0" />
-    <Button fx:id="geraAtaButton" layoutX="590.0" layoutY="573.0" mnemonicParsing="false" text="Gerar Ata" />
+    <Button fx:id="geraAtaButton" layoutX="590.0" layoutY="573.0" mnemonicParsing="false" onAction="#acaoBtnGeraAta" text="Gerar Ata" />
     <ComboBox fx:id="forumComboBox" layoutX="67.0" layoutY="12.0" prefWidth="165.0">
       <items>
         <FXCollections fx:factory="observableArrayList">

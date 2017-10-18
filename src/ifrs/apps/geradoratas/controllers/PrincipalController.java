@@ -1,8 +1,10 @@
 package ifrs.apps.geradoratas.controllers;
 
 import ifrs.apps.geradoratas.app.PrincipalView;
+import ifrs.apps.geradoratas.models.GeradorAta;
 import ifrs.apps.geradoratas.models.Participante;
 import java.util.ArrayList;
+import javafx.collections.ObservableList;
 
 public class PrincipalController {
 
@@ -41,8 +43,9 @@ public class PrincipalController {
         return retorno;
     }
 
-    public void tratarAdicionaParticipante() {
-        
+    public void geraAta(String forum, int numero, int dia, int mes, int ano, int hora, int minuto, ObservableList<Participante> participantes, ObservableList<String> pauta, ObservableList<String> encaminhamentos) {
+        GeradorAta ata = new GeradorAta(forum, numero, dia, mes, ano, hora, minuto, participantes, pauta, encaminhamentos);
+        System.out.println(ata.geraAta());
     }
     
 }
